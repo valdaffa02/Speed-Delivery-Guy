@@ -1,0 +1,949 @@
+[gd_scene load_steps=66 format=3 uid="uid://c57ws46n0s82k"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_bnjfj"]
+[ext_resource type="Texture2D" uid="uid://3mswpwtnbfcs" path="res://assets/images/delivery_town.png" id="2_vic22"]
+[ext_resource type="Texture2D" uid="uid://dkfoeq4mteg0r" path="res://assets/images/delivery_man_spritesheet.png" id="4_lag4t"]
+[ext_resource type="Texture2D" uid="uid://blh3ej78nrycx" path="res://assets/images/delivery_van.png" id="5_8syli"]
+[ext_resource type="Texture2D" uid="uid://dl2rqxf8dimln" path="res://assets/images/delivery_npc.png" id="5_j3mll"]
+[ext_resource type="Script" path="res://scenes/NPC.gd" id="6_accgp"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="7_7v5bp"]
+[ext_resource type="Texture2D" uid="uid://4jcwroojskxg" path="res://assets/images/demand_bubble.png" id="7_08nna"]
+[ext_resource type="Texture2D" uid="uid://bgsu4nkmyj82t" path="res://assets/images/delivery_box.png" id="8_sjum1"]
+[ext_resource type="Script" path="res://scenes/delivery_van.gd" id="9_8cr4d"]
+[ext_resource type="AudioStream" uid="uid://cgd3xqj35n3uh" path="res://assets/sfx/pop_01.wav" id="9_ud34r"]
+[ext_resource type="Texture2D" uid="uid://cn6ldlk61efmd" path="res://assets/images/delivery_box_0.png" id="10_8f7i2"]
+[ext_resource type="AudioStream" uid="uid://dihjuknhoynp7" path="res://assets/sfx/pop_02.wav" id="10_lcvmp"]
+[ext_resource type="Texture2D" uid="uid://jsan8bm7eupi" path="res://assets/images/delivery_box_1.png" id="11_g6ent"]
+[ext_resource type="Texture2D" uid="uid://08ti2bbv1x55" path="res://assets/images/delivery_box_2.png" id="12_ttb10"]
+[ext_resource type="StyleBox" uid="uid://rbia8ee6d1fh" path="res://scenes/van_box_button_hover.tres" id="13_6bm44"]
+[ext_resource type="Script" path="res://scenes/BoxButton.gd" id="13_jogcj"]
+[ext_resource type="Texture2D" uid="uid://dxxvyhnqhibee" path="res://assets/images/delivery_box_3.png" id="13_oe0u2"]
+[ext_resource type="StyleBox" uid="uid://d2nr2j072d2ke" path="res://scenes/van_box_button_pressed.tres" id="14_3gpb3"]
+[ext_resource type="StyleBox" uid="uid://bntn0erkcpwbj" path="res://scenes/van_box_button_focus.tres" id="15_5m6ew"]
+[ext_resource type="StyleBox" uid="uid://cevie6x06725c" path="res://scenes/button_ui_style.tres" id="21_8dwwa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02nth"]
+size = Vector2(66, 180)
+
+[sub_resource type="Curve" id="Curve_d88w3"]
+_data = [Vector2(0.140449, 0.494505), 0.0, 0.154425, 0, 0, Vector2(0.960674, 1), 0.978022, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_8x85n"]
+colors = PackedColorArray(0.674815, 0.674815, 0.674815, 0.745098, 0.709804, 0.709804, 0.709804, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dw4r"]
+size = Vector2(55.875, 174)
+
+[sub_resource type="Animation" id="Animation_eyt2l"]
+resource_name = "idle_l"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_evoyv"]
+resource_name = "idle_l_carry"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_blw48"]
+resource_name = "idle_r"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_inq65"]
+resource_name = "idle_r_carry"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_6yr2o"]
+resource_name = "walk_l"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_rywh3"]
+resource_name = "walk_l_carry"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 5, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_f14vg"]
+resource_name = "walk_r"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_1gjl7"]
+resource_name = "walk_r_carry"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 5, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f7uso"]
+_data = {
+"idle_l": SubResource("Animation_eyt2l"),
+"idle_l_carry": SubResource("Animation_evoyv"),
+"idle_r": SubResource("Animation_blw48"),
+"idle_r_carry": SubResource("Animation_inq65"),
+"walk_l": SubResource("Animation_6yr2o"),
+"walk_l_carry": SubResource("Animation_rywh3"),
+"walk_r": SubResource("Animation_f14vg"),
+"walk_r_carry": SubResource("Animation_1gjl7")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y436b"]
+animation = &"idle_l"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_voa2j"]
+animation = &"idle_r"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_vb0bj"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_y436b")
+blend_point_0/pos = -0.01
+blend_point_1/node = SubResource("AnimationNodeAnimation_voa2j")
+blend_point_1/pos = 0.01
+snap = 0.01
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ss0pd"]
+animation = &"idle_l_carry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dyqgb"]
+animation = &"idle_r_carry"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_8e6ht"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ss0pd")
+blend_point_0/pos = -0.01
+blend_point_1/node = SubResource("AnimationNodeAnimation_dyqgb")
+blend_point_1/pos = 0.01
+snap = 0.01
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_swo4u"]
+animation = &"walk_l"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5s4hl"]
+animation = &"walk_r"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_17vo7"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_swo4u")
+blend_point_0/pos = -0.01
+blend_point_1/node = SubResource("AnimationNodeAnimation_5s4hl")
+blend_point_1/pos = 0.01
+snap = 0.01
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvf3h"]
+animation = &"walk_l_carry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_envd6"]
+animation = &"walk_r_carry"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ufb42"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_nvf3h")
+blend_point_0/pos = -0.01
+blend_point_1/node = SubResource("AnimationNodeAnimation_envd6")
+blend_point_1/pos = 0.01
+snap = 0.01
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ydenx"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_msdjd"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0b838"]
+advance_mode = 2
+advance_condition = &"is_idle_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jv0bx"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_booql"]
+advance_mode = 2
+advance_condition = &"is_walking_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fv2a1"]
+advance_mode = 2
+advance_condition = &"is_idle_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gnxce"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vyjyr"]
+advance_mode = 2
+advance_condition = &"is_walking_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q83cw"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fygmr"]
+advance_mode = 2
+advance_condition = &"is_idle_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n687i"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bo5dw"]
+advance_mode = 2
+advance_condition = &"is_walking_carry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tk5mh"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q1tmc"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_vb0bj")
+states/Idle/position = Vector2(410, 78)
+states/IdleCarry/node = SubResource("AnimationNodeBlendSpace1D_8e6ht")
+states/IdleCarry/position = Vector2(410, 273)
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_17vo7")
+states/Walk/position = Vector2(748, 78)
+states/WalkCarry/node = SubResource("AnimationNodeBlendSpace1D_ufb42")
+states/WalkCarry/position = Vector2(748, 273)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ydenx"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_msdjd"), "Idle", "IdleCarry", SubResource("AnimationNodeStateMachineTransition_0b838"), "IdleCarry", "Idle", SubResource("AnimationNodeStateMachineTransition_jv0bx"), "IdleCarry", "WalkCarry", SubResource("AnimationNodeStateMachineTransition_booql"), "WalkCarry", "IdleCarry", SubResource("AnimationNodeStateMachineTransition_fv2a1"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_gnxce"), "Idle", "WalkCarry", SubResource("AnimationNodeStateMachineTransition_vyjyr"), "WalkCarry", "Idle", SubResource("AnimationNodeStateMachineTransition_q83cw"), "Walk", "IdleCarry", SubResource("AnimationNodeStateMachineTransition_fygmr"), "IdleCarry", "Walk", SubResource("AnimationNodeStateMachineTransition_n687i"), "Walk", "WalkCarry", SubResource("AnimationNodeStateMachineTransition_bo5dw"), "WalkCarry", "Walk", SubResource("AnimationNodeStateMachineTransition_tk5mh")]
+graph_offset = Vector2(-34, 47)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1d0c"]
+bg_color = Color(0.109804, 0.109804, 0.109804, 0.815686)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26pnt"]
+size = Vector2(536, 233)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtino"]
+size = Vector2(82, 232)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p188k"]
+bg_color = Color(0.201527, 0.201527, 0.201526, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3b8ov"]
+bg_color = Color(0.82606, 0.82606, 0.82606, 1)
+border_width_top = 2
+
+[node name="Game" type="Node2D"]
+process_mode = 3
+texture_filter = 1
+script = ExtResource("1_bnjfj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -235.0
+offset_top = -305.0
+offset_right = 3064.0
+offset_bottom = 689.0
+color = Color(0.436973, 0.960628, 1, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -90.0
+offset_top = -164.0
+offset_right = 934.0
+offset_bottom = 92.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_vic22")
+metadata/_edit_lock_ = true
+
+[node name="NPC1" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(701, 463)
+scale = Vector2(3, 3)
+texture = ExtResource("5_j3mll")
+hframes = 4
+script = ExtResource("6_accgp")
+
+[node name="NPCArea2D" type="Area2D" parent="NPC1"]
+scale = Vector2(0.333333, 0.333333)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC1/NPCArea2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_02nth")
+
+[node name="BubbleSprite" type="Sprite2D" parent="NPC1"]
+position = Vector2(23.3333, -39)
+texture = ExtResource("7_08nna")
+
+[node name="BoxSprite" type="Sprite2D" parent="NPC1"]
+position = Vector2(23.3333, -41)
+texture = ExtResource("8_sjum1")
+hframes = 4
+
+[node name="DemandCooldownTimer" type="Timer" parent="NPC1"]
+wait_time = 10.0
+one_shot = true
+
+[node name="NPC2" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(1203, 463)
+scale = Vector2(3, 3)
+texture = ExtResource("5_j3mll")
+hframes = 4
+frame = 1
+script = ExtResource("6_accgp")
+
+[node name="NPCArea2D" type="Area2D" parent="NPC2"]
+scale = Vector2(0.333333, 0.333333)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC2/NPCArea2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_02nth")
+
+[node name="BubbleSprite" type="Sprite2D" parent="NPC2"]
+position = Vector2(23.3333, -39)
+texture = ExtResource("7_08nna")
+
+[node name="BoxSprite" type="Sprite2D" parent="NPC2"]
+position = Vector2(23.3333, -41)
+texture = ExtResource("8_sjum1")
+hframes = 4
+
+[node name="DemandCooldownTimer" type="Timer" parent="NPC2"]
+wait_time = 10.0
+one_shot = true
+
+[node name="NPC3" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(2046, 463)
+scale = Vector2(3, 3)
+texture = ExtResource("5_j3mll")
+hframes = 4
+frame = 2
+script = ExtResource("6_accgp")
+
+[node name="NPCArea2D" type="Area2D" parent="NPC3"]
+scale = Vector2(0.333333, 0.333333)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC3/NPCArea2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_02nth")
+
+[node name="BubbleSprite" type="Sprite2D" parent="NPC3"]
+position = Vector2(23.3333, -39)
+texture = ExtResource("7_08nna")
+
+[node name="BoxSprite" type="Sprite2D" parent="NPC3"]
+position = Vector2(23.3333, -41)
+texture = ExtResource("8_sjum1")
+hframes = 4
+
+[node name="DemandCooldownTimer" type="Timer" parent="NPC3"]
+wait_time = 10.0
+one_shot = true
+
+[node name="NPC4" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(2547, 463)
+scale = Vector2(3, 3)
+texture = ExtResource("5_j3mll")
+hframes = 4
+frame = 3
+script = ExtResource("6_accgp")
+
+[node name="NPCArea2D" type="Area2D" parent="NPC4"]
+scale = Vector2(0.333333, 0.333333)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC4/NPCArea2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_02nth")
+
+[node name="BubbleSprite" type="Sprite2D" parent="NPC4"]
+position = Vector2(23.3333, -39)
+texture = ExtResource("7_08nna")
+
+[node name="BoxSprite" type="Sprite2D" parent="NPC4"]
+position = Vector2(23.3333, -41)
+texture = ExtResource("8_sjum1")
+hframes = 4
+
+[node name="DemandCooldownTimer" type="Timer" parent="NPC4"]
+wait_time = 10.0
+one_shot = true
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
+process_mode = 1
+position = Vector2(600, 500)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("7_7v5bp")
+
+[node name="RunDustParticle" type="CPUParticles2D" parent="Player"]
+position = Vector2(11, 60)
+emitting = false
+amount = 30
+lifetime = 0.6
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector2(0, -60)
+scale_amount_min = 20.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_d88w3")
+color = Color(0.741176, 0.741176, 0.741176, 0.690196)
+color_ramp = SubResource("Gradient_8x85n")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+position = Vector2(10, -31)
+scale = Vector2(3, 3)
+texture = ExtResource("4_lag4t")
+hframes = 3
+vframes = 2
+
+[node name="BoxSprite" type="Sprite2D" parent="Player/PlayerSprite"]
+visible = false
+position = Vector2(4.33334, -7)
+texture = ExtResource("8_sjum1")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(11, -22)
+shape = SubResource("RectangleShape2D_3dw4r")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -240)
+zoom = Vector2(0.9, 0.9)
+limit_left = -50
+limit_top = -300
+limit_right = 2950
+limit_bottom = 900
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+editor_draw_limits = true
+
+[node name="DebugLabel" type="Label" parent="Player"]
+visible = false
+offset_left = 47.0
+offset_top = -107.0
+offset_right = 87.0
+offset_bottom = -84.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_f7uso")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Player"]
+tree_root = SubResource("AnimationNodeStateMachine_q1tmc")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/is_idle = false
+parameters/conditions/is_idle_carry = false
+parameters/conditions/is_walking = false
+parameters/conditions/is_walking_carry = false
+parameters/Idle/blend_position = 0.0
+parameters/IdleCarry/blend_position = 0
+parameters/Walk/blend_position = 0
+parameters/WalkCarry/blend_position = 0
+
+[node name="InteractionLabel" type="Label" parent="Player"]
+visible = false
+offset_left = -4.0
+offset_top = -143.0
+offset_right = 22.0
+offset_bottom = -115.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1d0c")
+text = "E"
+horizontal_alignment = 1
+
+[node name="PickupBoxSFX" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("9_ud34r")
+pitch_scale = 0.8
+
+[node name="GiveBoxSFX" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("10_lcvmp")
+pitch_scale = 0.9
+
+[node name="DeliveryVan" type="StaticBody2D" parent="."]
+process_mode = 1
+position = Vector2(145, 470)
+script = ExtResource("9_8cr4d")
+
+[node name="Sprite2D" type="Sprite2D" parent="DeliveryVan"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_8syli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeliveryVan"]
+position = Vector2(-4.00002, -7.5)
+shape = SubResource("RectangleShape2D_26pnt")
+
+[node name="VanInteractionArea2D" type="Area2D" parent="DeliveryVan"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeliveryVan/VanInteractionArea2D"]
+position = Vector2(306, -8)
+shape = SubResource("RectangleShape2D_mtino")
+
+[node name="BoxesHBoxContainer" type="HBoxContainer" parent="DeliveryVan"]
+process_mode = 1
+offset_left = 16.0
+offset_top = -109.0
+offset_right = 254.0
+offset_bottom = -57.0
+theme_override_constants/separation = 10
+
+[node name="Box0Button" type="Button" parent="DeliveryVan/BoxesHBoxContainer"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = ExtResource("13_6bm44")
+theme_override_styles/pressed = ExtResource("14_3gpb3")
+theme_override_styles/focus = ExtResource("15_5m6ew")
+icon_alignment = 1
+script = ExtResource("13_jogcj")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryVan/BoxesHBoxContainer/Box0Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="DeliveryVan/BoxesHBoxContainer/Box0Button/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("10_8f7i2")
+
+[node name="Box1Button" type="Button" parent="DeliveryVan/BoxesHBoxContainer"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = ExtResource("13_6bm44")
+theme_override_styles/pressed = ExtResource("14_3gpb3")
+theme_override_styles/focus = ExtResource("15_5m6ew")
+icon_alignment = 1
+script = ExtResource("13_jogcj")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryVan/BoxesHBoxContainer/Box1Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="DeliveryVan/BoxesHBoxContainer/Box1Button/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("11_g6ent")
+
+[node name="Box2Button" type="Button" parent="DeliveryVan/BoxesHBoxContainer"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = ExtResource("13_6bm44")
+theme_override_styles/pressed = ExtResource("14_3gpb3")
+theme_override_styles/focus = ExtResource("15_5m6ew")
+icon_alignment = 1
+script = ExtResource("13_jogcj")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryVan/BoxesHBoxContainer/Box2Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="DeliveryVan/BoxesHBoxContainer/Box2Button/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("12_ttb10")
+
+[node name="Box3Button" type="Button" parent="DeliveryVan/BoxesHBoxContainer"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = ExtResource("13_6bm44")
+theme_override_styles/pressed = ExtResource("14_3gpb3")
+theme_override_styles/focus = ExtResource("15_5m6ew")
+icon_alignment = 1
+script = ExtResource("13_jogcj")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryVan/BoxesHBoxContainer/Box3Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="DeliveryVan/BoxesHBoxContainer/Box3Button/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("13_oe0u2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OverlayRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = -119.0
+offset_top = -90.0
+offset_right = 1306.0
+offset_bottom = 702.0
+color = Color(0.262933, 0.262932, 0.262932, 0.623529)
+
+[node name="StartCountdownLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 42
+text = "Game Scene"
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 48
+text = "Score: "
+horizontal_alignment = 1
+
+[node name="GameOverContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer/GameOverContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 42
+text = "GAME OVER!"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer/GameOverContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("21_8dwwa")
+text = "Play Again"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/GameOverContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("21_8dwwa")
+text = "Main Menu
+"
+
+[node name="PauseMenuContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PausedLabel" type="Label" parent="CanvasLayer/PauseMenuContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 42
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/PauseMenuContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("21_8dwwa")
+text = "Continue Game"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseMenuContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("21_8dwwa")
+text = "Main Menu
+"
+
+[node name="GameTimerContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameTimerLabel" type="Label" parent="CanvasLayer/GameTimerContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "Time Left: 60.0s"
+
+[node name="GameTimerProgressBar" type="ProgressBar" parent="CanvasLayer/GameTimerContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_p188k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3b8ov")
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="StartCountdownTimer" type="Timer" parent="."]
+process_mode = 2
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="NPC1/NPCArea2D" to="NPC1" method="_on_npc_area_2d_body_entered"]
+[connection signal="body_exited" from="NPC1/NPCArea2D" to="NPC1" method="_on_npc_area_2d_body_exited"]
+[connection signal="timeout" from="NPC1/DemandCooldownTimer" to="NPC1" method="_on_demand_cooldown_timer_timeout"]
+[connection signal="body_entered" from="NPC2/NPCArea2D" to="NPC2" method="_on_npc_area_2d_body_entered"]
+[connection signal="body_exited" from="NPC2/NPCArea2D" to="NPC2" method="_on_npc_area_2d_body_exited"]
+[connection signal="timeout" from="NPC2/DemandCooldownTimer" to="NPC2" method="_on_demand_cooldown_timer_timeout"]
+[connection signal="body_entered" from="NPC3/NPCArea2D" to="NPC3" method="_on_npc_area_2d_body_entered"]
+[connection signal="body_exited" from="NPC3/NPCArea2D" to="NPC3" method="_on_npc_area_2d_body_exited"]
+[connection signal="timeout" from="NPC3/DemandCooldownTimer" to="NPC3" method="_on_demand_cooldown_timer_timeout"]
+[connection signal="body_entered" from="NPC4/NPCArea2D" to="NPC4" method="_on_npc_area_2d_body_entered"]
+[connection signal="body_exited" from="NPC4/NPCArea2D" to="NPC4" method="_on_npc_area_2d_body_exited"]
+[connection signal="timeout" from="NPC4/DemandCooldownTimer" to="NPC4" method="_on_demand_cooldown_timer_timeout"]
+[connection signal="body_entered" from="DeliveryVan/VanInteractionArea2D" to="DeliveryVan" method="_on_van_interaction_area_2d_body_entered"]
+[connection signal="body_exited" from="DeliveryVan/VanInteractionArea2D" to="DeliveryVan" method="_on_van_interaction_area_2d_body_exited"]
+[connection signal="pressed" from="DeliveryVan/BoxesHBoxContainer/Box0Button" to="DeliveryVan" method="_on_box_0_button_pressed"]
+[connection signal="pressed" from="DeliveryVan/BoxesHBoxContainer/Box1Button" to="DeliveryVan" method="_on_box_1_button_pressed"]
+[connection signal="pressed" from="DeliveryVan/BoxesHBoxContainer/Box2Button" to="DeliveryVan" method="_on_box_2_button_pressed"]
+[connection signal="pressed" from="DeliveryVan/BoxesHBoxContainer/Box3Button" to="DeliveryVan" method="_on_box_3_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOverContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenuContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="StartCountdownTimer" to="." method="_on_start_countdown_timer_timeout"]

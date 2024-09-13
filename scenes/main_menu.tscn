@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4pos878c0qxi"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_l7yb0"]
+[ext_resource type="Texture2D" uid="uid://3mswpwtnbfcs" path="res://assets/images/delivery_town.png" id="2_he0t0"]
+[ext_resource type="StyleBox" uid="uid://cevie6x06725c" path="res://scenes/button_ui_style.tres" id="3_rhfd4"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_r0li8"]
+thickness = 3
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("1_l7yb0")
+
+[node name="SkyRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -868.0
+offset_right = 2191.0
+offset_bottom = 652.0
+color = Color(0.435294, 0.960784, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_he0t0")
+expand_mode = 3
+
+[node name="OverlayRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -119.0
+offset_top = -90.0
+offset_right = 1306.0
+offset_bottom = 702.0
+color = Color(0.262933, 0.262932, 0.262932, 0.623529)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -33.0
+offset_right = 48.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 42
+text = "SPEED DELIVERY GUY"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_r0li8")
+
+[node name="TopScoreLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "Top Score: "
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("3_rhfd4")
+text = "Start Game"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_rhfd4")
+text = "Exit Game
+"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
