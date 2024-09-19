@@ -120,6 +120,7 @@ func increase_score():
 # Restart game conditions
 func restart_game() -> void:
 	player.reset()
+	score = 0
 	
 	# Restart the countdown timer
 	start_countdown_timer.start()

@@ -590,8 +590,10 @@ position = Vector2(11, -22)
 shape = SubResource("RectangleShape2D_3dw4r")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+process_mode = 3
 offset = Vector2(0, -240)
 zoom = Vector2(0.9, 0.9)
+process_callback = 0
 limit_left = -50
 limit_top = -300
 limit_right = 2950
